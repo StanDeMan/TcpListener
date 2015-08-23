@@ -1,0 +1,4 @@
+E:\Develop\DotNET\TcpListener\TcpListener\bin\Debug\TcpListener.exe
+E:\Develop\DotNET\TcpListener\TcpListener\bin\Debug\TcpListener.pdb
+E:\Develop\DotNET\TcpListener\TcpListener\obj\Debug\TcpListener.exe
+E:\Develop\DotNET\TcpListener\TcpListener\obj\Debug\TcpListener.pdb

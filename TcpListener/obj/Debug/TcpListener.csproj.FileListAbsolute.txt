@@ -1,0 +1,1 @@
+E:\Develop\DotNET\TcpListener\TcpListener\obj\Debug\TcpListener.csprojResolveAssemblyReference.cache
