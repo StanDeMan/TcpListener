@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Listener
 {
-    using Listener.Utility;
-    using Listener.Socket;
+    // internal namespace
+    using Socket;
 
     // State object for reading client data asynchronously
     public class StateObject
@@ -22,7 +16,7 @@ namespace Listener
         /// <returns></returns>
         public static int Main(String[] args)
         {
-            SocketListener.Start();
+            Work.Start();
             return 0;
         }
     }
