@@ -13,19 +13,19 @@ namespace Listener
     public class StateObject
     {
         // Client  socket.
-        public Socket workSocket = null;
+        public Socket WorkSocket;
         // Size of receive buffer.
         public const int BufferSize = 4096;
         // Receive buffer.
-        public byte[] buffer = new byte[BufferSize];
+        public byte[] Buffer = new byte[BufferSize];
         // Received data string.
-        public StringBuilder sb = new StringBuilder();
+        public StringBuilder Sb = new StringBuilder();
     }
 
     public class AsynchronousSocketListener
     {
         // Thread signal.
-        public static ManualResetEvent allDone = new ManualResetEvent(false);
+        public static ManualResetEvent AllDone = new ManualResetEvent(false);
 
         public static void StartListening()
         {
@@ -49,14 +49,14 @@ namespace Listener
                 while (true)
                 {
                     // Set the event to nonsignaled state.
-                    allDone.Reset();
+                    AllDone.Reset();
 
                     // Start an asynchronous socket to listen for connections.
                     Console.WriteLine("Waiting for a connection...");
                     listener.BeginAccept(AcceptCallback, listener);
 
                     // Wait until a connection is made before continuing.
-                    allDone.WaitOne();
+                    AllDone.WaitOne();
                 }
             }
             catch (Exception e)
@@ -70,15 +70,15 @@ namespace Listener
         public static void AcceptCallback(IAsyncResult ar)
         {
             // Signal the main thread to continue.
-            allDone.Set();
+            AllDone.Set();
 
             // Get the socket that handles the client request.
             var listener = (Socket)ar.AsyncState;
             var handler = listener.EndAccept(ar);
 
             // Create the state object.
-            var state = new StateObject { workSocket = handler };
-            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReadCallback, state);
+            var state = new StateObject { WorkSocket = handler };
+            handler.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, ReadCallback, state);
         }
 
         public static void ReadCallback(IAsyncResult ar)
@@ -86,17 +86,17 @@ namespace Listener
             // Retrieve the state object and the handler socket
             // from the asynchronous state object.
             var state = (StateObject)ar.AsyncState;
-            var handler = state.workSocket;
+            var handler = state.WorkSocket;
 
             // Read data from the client socket. 
             var bytesRead = handler.EndReceive(ar);
 
             if (bytesRead <= 0) return;
             // There  might be more data, so store the data received so far.
-            state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
+            state.Sb.Append(Encoding.ASCII.GetString(state.Buffer, 0, bytesRead));
 
             // Check for end-of-line tag <cr><lf>. If it is not there, read more data.
-            var content = state.sb.ToString();
+            var content = state.Sb.ToString();
             var newlinePos = GetIndex(content, "\r") ?? GetIndex(content, "\n");
 
             if (newlinePos.HasValue)
@@ -111,7 +111,7 @@ namespace Listener
             else
             {
                 // Not all data received. Get more.
-                handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReadCallback, state);
+                handler.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, ReadCallback, state);
             }
         }
 
