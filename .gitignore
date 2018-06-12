@@ -6,3 +6,9 @@
 *.sqlite
 /.vs/VSWorkspaceState.json
 *.suo
+*.dtbcache
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
+*.cs
