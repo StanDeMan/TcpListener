@@ -2,11 +2,12 @@
 using System.IO;
 using System.Text;
 
+// ReSharper disable UnusedMember.Global
 namespace Listener.Driver
 {
     public class Pwm
     {
-        private bool IsLinux = Helper.Environment.IsLinux;
+        private readonly bool isLinux = Helper.Environment.IsLinux;
         private const string FifoName = "/dev/pi-blaster";
         private readonly StreamWriter pin;
 
@@ -30,11 +31,9 @@ namespace Listener.Driver
         /// </summary>
         public Pwm()
         {
-            if(IsLinux)
-            { 
-                var file = new FileInfo(FifoName).OpenWrite();
-                pin = new StreamWriter(file, Encoding.ASCII);
-            }
+            if (!isLinux) return;
+            var file = new FileInfo(FifoName).OpenWrite();
+            pin = new StreamWriter(file, Encoding.ASCII);
         }
 
         /// <summary>
@@ -45,16 +44,14 @@ namespace Listener.Driver
         public void Set(HeaderP1 channel, double value)
         {
             if ((value < 0) || (value > 100))
-                throw new ArgumentOutOfRangeException("value", "Value must be between 0 - 100 percent.");
+                throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 - 100 percent.");
 
             var s = (int)channel + "=" + value + "\n";
             Console.WriteLine(s);
 
-            if(IsLinux)
-            { 
-                pin.Write(s);
-                pin.Flush();
-            }
+            if (!isLinux) return;
+            pin.Write(s);
+            pin.Flush();
         }
     }
 }
