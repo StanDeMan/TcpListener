@@ -12,3 +12,5 @@
 *.ide-shm
 *.ide-wal
 *.cs
+/TcpListener/bin/Debug
+/TcpListener/obj/Debug
