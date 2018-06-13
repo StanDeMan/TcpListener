@@ -5,7 +5,6 @@ E:\Develop\DotNET\TcpListener\TcpListener\obj\Debug\TcpListener.pdb
 F:\Development\TcpListener\TcpListener\bin\Debug\TcpListener.exe.config
 F:\Development\TcpListener\TcpListener\bin\Debug\TcpListener.exe
 F:\Development\TcpListener\TcpListener\bin\Debug\TcpListener.pdb
-F:\Development\TcpListener\TcpListener\obj\Debug\Listener.csprojAssemblyReference.cache
 F:\Development\TcpListener\TcpListener\obj\Debug\Listener.csproj.CoreCompileInputs.cache
 F:\Development\TcpListener\TcpListener\obj\Debug\TcpListener.exe
 F:\Development\TcpListener\TcpListener\obj\Debug\TcpListener.pdb
